@@ -1,0 +1,68 @@
+unit,sub_unit,uc_id,use_case_name,x_innovation,y_innovation,maturity_stages,effort,use_case_family,impact,build_complexity,no_data_sources,calc_complexity
+Asset management,Research,0,Data Warehouse modernization,1,1,complex,10,Infrastructure,4,30,19,49
+Asset management,Research,1,Risk Reporting,3,3,medium,10,Risk,20,10,6,16
+Asset management,Research,2,Benchmark Creation,6,2,medium,8,Performance & Attribution,12,20,3,23
+Asset management,Research,3,Performance Calculations,4,2,simple,2,Performance & Attribution,10,5,4,9
+Asset management,Research,4,Back-test,1,4,simple,2,Quantitative Research,7,5,3,8
+Asset management,Research,5,Collateral Management,4,5,complex,14,Post Trade Execution,14,30,4,34
+Asset management,Research,6,Fundamental Analysis,1,8,medium,12,Quantitative Research,12,20,3,23
+Asset management,Research,7,Risk Reward Analysis,6,8,medium,5,Post Trade Execution,16,20,2,22
+Asset management,Research,8,Tail Risk,12,8,medium,8,Risk,16,20,3,23
+Asset management,Research,9,Portfolio Rebalancing,11,2,medium,12,Performance & Attribution,15,15,6,21
+Asset management,Research,10,Multi-Factor Models,2,9,medium,6,Quantitative Research,10,20,3,23
+Asset management,Research,11,Corporate actions,14,3,complex,16,Performance & Attribution,9,30,2,32
+Asset management,Research,12,Portfolio Construction,1,12,medium,11,Quantitative Research,17,10,4,14
+Asset management,Research,13,Transaction Cost Analysis (TCA),7,11,medium,4,Post Trade Execution,4,20,2,22
+Asset management,Research,14,Algorithm Optimization,14,11,complex,20,Post Trade Execution,20,30,5,35
+Asset management,Research,15,Value at risk (VAR) Analysis,14,10,medium,7,Risk,7,20,0,20
+Asset management,Research,16,Multi-Asset Class Point-In-Time,16,11,medium,12,Risk,9,20,0,20
+Asset management,Research,17,Investment Analysis,17,5,complex,16,Performance & Attribution,12,30,6,36
+Asset management,Research,18,Suspicious activity report prepopulation,18,2,complex,19,Performance & Attribution,7,30,8,38
+Asset management,Research,19,Early warning credit risk monitoring,17,10,complex,16,Risk,16,30,7,37
+Asset management,Research,20,Automated document classification,14,8,simple,3,Quantitative Research,16,5,1,6
+Asset management,Research,21,Identify emerging product trends,2,16,medium,14,Quantitative Research,20,20,3,23
+Asset management,Research,22,Create customers specific products,6,17,complex,17,Quantitative Research,19,30,0,30
+Asset management,Investor,23,Data Warehouse modernization,1,1,complex,15,Infrastructure,4,30,0,30
+Asset management,Investor,24,Investor Segmentation,1,7,simple,6,Investor Acquisition,8,5,0,5
+Asset management,Investor,25,Reporting,5,1,simple,4,"Investor Engagement",4,10,0,10
+Asset management,Investor,26,Investor Targeting,2,12,simple,3,Investor Acquisition,14,5,0,5
+Asset management,Investor,27,Churn Prediction,2,15,medium,6,Investor Acquisition,16,15,0,15
+Asset management,Investor,28,KYC Screening,4,6,medium,11,"Investor Onboarding",18,15,0,15
+Asset management,Investor,29,AML Screening,5,8,complex,16,"Investor Onboarding",15,30,0,30
+Asset management,Investor,30,Fraud Detection,7,10,complex,12,"Investor Onboarding",15,30,0,30
+Asset management,Investor,31,Product Suitability,9,4,simple,4,Next Best Action,9,1,0,1
+Asset management,Investor,32,Preference-based Portfolio Construction,14,3,medium,6,"Investor Engagement",12,20,0,20
+Asset management,Investor,33,Cross-sell & Up-sell,11,8,simple,3,Next Best Action,16,5,0,5
+Asset management,Investor,34,Tailored Portfolio Construction,17,9,medium,9,Next Best Action,14,15,0,15
+Asset management,Investor,35,Personalization,18,2,complex,15,"Investor Engagement",20,30,0,30
+Asset management,Regulation,36,Data Warehouse modernization,1,1,complex,10,Infrastructure,4,30,0,30
+Asset management,Regulation,37,"Markets in Financial Instruments Directive (MIFID II)",1,4,medium,9,Trade Activity Reporting,8,15,0,15
+Asset management,Regulation,38,Fundamental Review of the Trading Book (FRTB),2,10,medium,8,Trade Activity Reporting,7,15,0,15
+Asset management,Regulation,39,international regulatory framework for banks (Basel III),7,1,complex,16,Operational Resilience,12,30,0,30
+Asset management,Regulation,40,raise capital (Reg S or Regulation S),10,2,medium,11,Operational Resilience,8,15,0,15
+Asset management,Regulation,41,European Market Infrastructure Regulation (EMIR),3,12,medium,9,Trade Activity Reporting,13,15,0,15
+Asset management,Regulation,42,Reduce the risk of insolvency (Solvency II),7,8,simple,5,"Risk, Stress Testing, Capital Requirements",15,5,0,5
+Asset management,Regulation,43,Undertakings for Collective Investment in Transferable Securities Directive (UCITS),9,9,medium,6,"Risk, Stress Testing, Capital Requirements",13,15,,15
+Asset management,Regulation,44,Open Protocol Enabling Risk Aggregation (OPERA),9,10,simple,4,"Risk, Stress Testing, Capital Requirements",8,5,,5
+Asset management,Regulation,45,Packaged retail investment and insurance products (PRIIPs) ,10,5,medium,3,Investment Products & ESG Reporting,4,15,,15
+Asset management,Regulation,46,"Regulatory Stress Testing",12,10,medium,12,"Risk, Stress Testing, Capital Requirements",19,15,,15
+Asset management,Regulation,47,EU Sustainable Finance Disclosure Regulation (SFDR) ,18,9,complex,16,Investment Products & ESG Reporting,18,30,,30
+Asset management,Regulation,48,Task Force on Climate Related Financial Disclosures (TCFD) ,17,7,medium,13,Investment Products & ESG Reporting,15,15,,15
+Asset management,Regulation,49,General Data Protection Regulation (GDPR) ,19,3,complex,20,Operational Resilience,12,30,,30
+Retail,Consumer-Experiences,50,Data Warehouse modernization,1,1,complex,10,Infrastructure,4,30,,30
+Retail,Consumer-Experiences,51,Customer Segmentation,1,7,simple,3,Customer Acquisition,12,5,,5
+Retail,Consumer-Experiences,52,Customer Targeting,2,12,simple,5,Customer Acquisition,14,5,,5
+Retail,Consumer-Experiences,53,Churn Prediction,2,15,medium,7,Customer Acquisition,16,15,,15
+Retail,Consumer-Experiences,54,Personalized Digital Experiences,7,16,complex,12,Customer Acquisition,14,30,,30
+Retail,Consumer-Experiences,55,KYC Screening,4,6,medium,9,Customer Onboarding & Screening,8,15,,15
+Retail,Consumer-Experiences,56,AML Screening,5,8,complex,16,Customer Onboarding & Screening,11,30,,30
+Retail,Consumer-Experiences,57,Fraud Detection,9,12,complex,12,Customer Onboarding & Screening,10,30,,30
+Retail,Consumer-Experiences,58,Enhanced Due Diligence,13,14,complex,14,Customer Onboarding & Screening,16,30,,30
+Retail,Consumer-Experiences,59,Product Suitability,3,2,simple,4,Next Best Action,9,5,,5
+Retail,Consumer-Experiences,60,Personalized Financial Planning,11,7,complex,13,Next Best Action,18,30,,30
+Retail,Consumer-Experiences,61,Tailored Portfolio Construction,17,9,medium,9,Next Best Action,12,15,,15
+Retail,Consumer-Experiences,62,Portfolio Risk Management,8,5,medium,4,Next Best Action,18,15,,15
+Retail,Consumer-Experiences,63,Investor Preference-based Financial Planning,12,3,complex,13,Customer Engagement,9,30,,30
+Retail,Consumer-Experiences,64,Portfolio Construction,5,1,simple,6,Customer Engagement,11,5,,5
+Retail,Consumer-Experiences,65,Personalization,14,2,medium,10,Customer Engagement,18,15,,15
+Retail,Consumer-Experiences,66,Differentiated Digital Experience,17,4,complex,16,Customer Engagement,14,30,,30
