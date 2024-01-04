@@ -5,13 +5,30 @@ import pandas as pd
 st.set_page_config(layout="wide")
 st.title("Use Case Radar")
 
-df = pd.read_csv('2024-01-02_UseCase_maturity_map_for_FSI - use case master for radar.csv')
+df = pd.read_excel('2024-01-02_UseCase_maturity_map_for_FSI.xlsx', sheet_name='use_case_master_radar')
+
 unit = df['unit'].unique()
 unit_choice = st.sidebar.selectbox('Select your Business Unit:', unit)
+
 sub_unit = df['sub_unit'].loc[df['unit'] == unit_choice].unique()
 sub_unit_choice = st.sidebar.multiselect('Select your Use Case Category:', sub_unit, default=sub_unit[0])
 
-df_filtered = df.loc[(df['unit'] == unit_choice) & (df['sub_unit'].isin(sub_unit_choice))]
+maturity_stages = st.sidebar.select_slider(
+    'Select a level of effort',
+    options=['simple', 'medium', 'complex'],
+    value='complex')
+
+if maturity_stages == 'simple':
+    maturity_stages_choice = ['simple']
+elif maturity_stages == 'medium':
+    maturity_stages_choice = ['simple', 'medium']
+elif maturity_stages == 'complex':
+    maturity_stages_choice = ['simple', 'medium', 'complex']
+else:
+    print("unexpected")
+
+df_filtered = df.loc[(df['unit'] == unit_choice) & (df['sub_unit'].isin(sub_unit_choice)) & (
+    df['maturity_stages'].isin(maturity_stages_choice))]
 
 # st.dataframe(df_filtered)
 
@@ -40,14 +57,14 @@ fig = px.scatter(df_filtered,
 
 fig.update_xaxes(ticktext=["Foundation", "Optimization", "Transformation"],
                  tickvals=["1", "10", "20"],
-                 showgrid=True,
-                 zeroline=False)
+                 showgrid=False,
+                 zeroline=True)
 
 fig.update_yaxes(ticktext=["Foundation", "Optimization", "Transformation"],
                  tickvals=["1", "10", "20"],
                  tickangle=270,
-                 showgrid=True,
-                 zeroline=False)
+                 showgrid=False,
+                 zeroline=True)
 
 fig_2 = px.scatter(df_filtered,
                    labels={
@@ -73,18 +90,18 @@ fig_2 = px.scatter(df_filtered,
                    width=900,
                    )
 
-# xaxes is the Effort
+# x axes is the Effort
 fig_2.update_xaxes(ticktext=["Simple", "Medium", "Complex"],
                    tickvals=["1", "10", "20"],
-                   showgrid=True,
-                   zeroline=False)
+                   showgrid=False,
+                   zeroline=True)
 
-# yaxes is the Innovation
-fig_2.update_yaxes(ticktext=["Low", "Medium", "Hight"],
+# y axes is the Innovation
+fig_2.update_yaxes(ticktext=["Low", "Medium", "High"],
                    tickvals=["1", "10", "20"],
                    tickangle=270,
-                   showgrid=True,
-                   zeroline=False)
+                   showgrid=False,
+                   zeroline=True)
 
 tab1, tab2 = st.tabs(["Maturity Radar", "Long Hanging Fruit Radar"])
 with tab1:
