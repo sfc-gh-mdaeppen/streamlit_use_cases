@@ -2,15 +2,18 @@ import plotly.express as px
 import streamlit as st
 import pandas as pd
 
+pd.options.display.max_columns = None
+
 st.set_page_config(layout="wide")
 st.title("Use Case Radar")
 
-df = pd.read_excel('2024-01-02_UseCase_maturity_map_for_FSI.xlsx', sheet_name='use_case_master_radar')
+df_usecase = pd.read_excel('2024-01-02_UseCase_maturity_map_for_FSI.xlsx', sheet_name='use_case_master_radar')
 
-unit = df['unit'].unique()
+# context selection
+unit = df_usecase['unit'].unique()
 unit_choice = st.sidebar.selectbox('Select your Business Unit:', unit)
 
-sub_unit = df['sub_unit'].loc[df['unit'] == unit_choice].unique()
+sub_unit = df_usecase['sub_unit'].loc[df_usecase['unit'] == unit_choice].unique()
 sub_unit_choice = st.sidebar.multiselect('Select your Use Case Category:', sub_unit, default=sub_unit[0])
 
 maturity_stages = st.sidebar.select_slider(
@@ -27,8 +30,9 @@ elif maturity_stages == 'complex':
 else:
     print("unexpected")
 
-df_filtered = df.loc[(df['unit'] == unit_choice) & (df['sub_unit'].isin(sub_unit_choice)) & (
-    df['maturity_stages'].isin(maturity_stages_choice))]
+df_filtered = df_usecase.loc[(df_usecase['unit'] == unit_choice) &
+                             (df_usecase['sub_unit'].isin(sub_unit_choice)) &
+                             (df_usecase['maturity_stages'].isin(maturity_stages_choice))]
 
 # st.dataframe(df_filtered)
 
