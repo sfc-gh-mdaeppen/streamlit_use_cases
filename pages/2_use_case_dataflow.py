@@ -91,8 +91,8 @@ df_final = pd.concat(data_frames, join='outer', axis=1).assign(value=1)
 
 # df_final.to_csv('links.csv', index=False)
 
-# print("df_final: ")
-# print(df_final)
+print("df_final: ")
+print(df_final)
 
 # ----PLOT SANKEY------#
 fig = go.Figure(data=[go.Sankey(

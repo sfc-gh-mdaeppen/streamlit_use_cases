@@ -57,18 +57,20 @@ fig = px.scatter(df_filtered,
                  size_max=60,
                  height=700,
                  width=900,
+                 range_x=[-1, 22],
+                 range_y=[-1, 22],
                  )
 
 fig.update_xaxes(ticktext=["Foundation", "Optimization", "Transformation"],
                  tickvals=["1", "10", "20"],
-                 showgrid=False,
-                 zeroline=True)
+                 showgrid=True,
+                 zeroline=False)
 
 fig.update_yaxes(ticktext=["Foundation", "Optimization", "Transformation"],
                  tickvals=["1", "10", "20"],
                  tickangle=270,
-                 showgrid=False,
-                 zeroline=True)
+                 showgrid=True,
+                 zeroline=False)
 
 fig_2 = px.scatter(df_filtered,
                    labels={
@@ -97,15 +99,15 @@ fig_2 = px.scatter(df_filtered,
 # x axes is the Effort
 fig_2.update_xaxes(ticktext=["Simple", "Medium", "Complex"],
                    tickvals=["1", "10", "20"],
-                   showgrid=False,
-                   zeroline=True)
+                   showgrid=True,
+                   zeroline=False)
 
 # y axes is the Innovation
 fig_2.update_yaxes(ticktext=["Low", "Medium", "High"],
                    tickvals=["1", "10", "20"],
                    tickangle=270,
-                   showgrid=False,
-                   zeroline=True)
+                   showgrid=True,
+                   zeroline=False)
 
 tab1, tab2 = st.tabs(["Maturity Radar", "Long Hanging Fruit Radar"])
 with tab1:
