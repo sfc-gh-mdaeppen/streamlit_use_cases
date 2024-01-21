@@ -29,8 +29,10 @@ df_dataflow = pd.read_excel('2024-01-02_UseCase_maturity_map_for_FSI.xlsx', head
                                         'source_1013': int,
                                         'target_1013': int
                                         })
-# print("df_dataflow:")
-# print(df_dataflow)
+
+
+print("df_dataflow")
+print(df_dataflow)
 
 # context selection
 unit = df_dataflow['unit'].dropna().loc[lambda x: x != 'DataSource'].unique()
@@ -39,8 +41,13 @@ unit_choice = st.sidebar.selectbox('Select your Business Unit:', unit)
 sub_unit = df_dataflow['sub_unit'].loc[df_dataflow['unit'] == unit_choice].unique()
 sub_unit_choice = st.sidebar.multiselect('Select your Use Case Category:', sub_unit, default=sub_unit[0])
 
-df_dataflow = df_dataflow.loc[(df_dataflow['unit'] == unit_choice) &
-                              (df_dataflow['sub_unit'].isin(sub_unit_choice))]
+use_case = (df_dataflow['uc_id'].loc[(df_dataflow['unit'] == unit_choice) &
+                              (df_dataflow['sub_unit'].isin(sub_unit_choice))].astype(int).unique())
+use_case_choice = st.sidebar.multiselect('Select your Use Cases:', use_case, default=use_case[1])
+
+
+df_dataflow = df_dataflow.loc[(df_dataflow['uc_id'].isin(use_case_choice))]
+
 
 df_target = pd.concat([df_dataflow['target_1000'],
                        df_dataflow['target_1001'],
@@ -96,9 +103,6 @@ print(df_final)
 
 # ----PLOT SANKEY------#
 fig = go.Figure(data=[go.Sankey(
-    valueformat=".0f",
-    valuesuffix="TWh",
-    # Define nodes
     node=dict(
         pad=15,
         thickness=15,
@@ -107,24 +111,19 @@ fig = go.Figure(data=[go.Sankey(
             width=1
         ),
         label=df_dataflow['node_name'].dropna(axis=0, how='any'),
-        color=df_dataflow['color'].dropna(axis=0, how='any'),
-        customdata=df_dataflow['color'],
-        hovertemplate='Node %{customdata} has total value %{value}<extra>2</extra>',
+        color=df_dataflow['color'].dropna(axis=0, how='any')
     ),
     link=dict(
         target=df_final['source'].dropna(axis=0, how='any'),
         source=df_final['target'].dropna(axis=0, how='any'),
         value=df_final['value'].dropna(axis=0, how='any'),
-        color=df_final['link_color'].dropna(axis=0, how='any'),
-        hovertemplate='Link from node %{source.customdata}<br />' +
-                      'to node%{target.customdata}<br />has value %{value}' +
-                      '<br />and data %{customdata}<extra></extra>',
+        color=df_final['link_color'].dropna(axis=0, how='any')
     )
 )])
 
 fig.update_layout(height=700,
                   width=900,
-                  hovermode='x', )
+                  hovermode='y', )
 
 # ---DISPLAY SANKEY IN STREAMLIT-----#
 st.plotly_chart(fig)
