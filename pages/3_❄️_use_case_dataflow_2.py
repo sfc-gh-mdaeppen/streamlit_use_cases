@@ -1,9 +1,10 @@
-import pandas as pd
 import graphviz
-
+import pandas as pd
 import streamlit as st
 
 pd.options.display.max_columns = None
+
+st.set_page_config(layout="wide")
 
 df_raw = pd.read_excel('2024-01-02_UseCase_maturity_map_for_FSI.xlsx', header=1,
                        sheet_name='use_case_master_dataflow',
@@ -35,14 +36,13 @@ unit_choice = st.sidebar.selectbox('Select your Business Unit:', unit)
 sub_unit = df_raw['sub_unit'].loc[df_raw['unit'] == unit_choice].unique()
 sub_unit_choice = st.sidebar.multiselect('Select your Use Case Category:', sub_unit, default=sub_unit[0])
 
-use_case = (df_raw['uc_id'].loc[(df_raw['unit'] == unit_choice) &
-                                (df_raw['sub_unit'].isin(sub_unit_choice))].astype(int).unique())
+use_case = ((df_raw['node_name']).loc[(df_raw['unit'] == unit_choice) &
+                                      (df_raw['sub_unit'].isin(
+                                          sub_unit_choice))].unique())
+
 use_case_choice = st.sidebar.multiselect('Select your Use Cases:', use_case, default=use_case[1])
 
-df_filtered = df_raw.loc[(df_raw['uc_id'].isin(use_case_choice))]
-
-print("df_filtered: ")
-print(df_filtered)
+df_filtered = df_raw.loc[(df_raw['node_name'].isin(use_case_choice))]
 
 df_target = pd.concat([df_filtered['target_1000'],
                        df_filtered['target_1001'],
@@ -91,14 +91,13 @@ df_color_result = pd.DataFrame({'link_color': df_color}).dropna()
 agg_data_frames = [df_source_result, df_target_result, df_color_result]
 df_final = pd.concat(agg_data_frames, join='outer', axis=1)
 
-df_final_enhanced = df_final.merge(df_raw[['uc_id', 'node_name']], how='inner', left_on='target', right_on='uc_id', validate="many_to_many")
+df_final_enhanced = df_final.merge(df_raw[['uc_id', 'node_name']], how='inner', left_on='target', right_on='uc_id',
+                                   validate="many_to_many")
 
-df_final_enhanced = df_final_enhanced.merge(df_raw[['uc_id', 'node_name']], how='inner', left_on='source', right_on='uc_id', validate="many_to_many")
+df_final_enhanced = df_final_enhanced.merge(df_raw[['uc_id', 'node_name']], how='inner', left_on='source',
+                                            right_on='uc_id', validate="many_to_many")
 
 df_final_enhanced.to_csv('links.csv', index=False)
-
-print("df_final2: ")
-print(df_final_enhanced)
 
 # Create Graph Nodes and interconnecting Edges
 graph = graphviz.Graph("jupyter_moons", comment="Jupyter moons")
