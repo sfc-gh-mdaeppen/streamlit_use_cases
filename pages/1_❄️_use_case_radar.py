@@ -1,19 +1,19 @@
+import pandas as pd
 import plotly.express as px
 import streamlit as st
-import pandas as pd
 
 pd.options.display.max_columns = None
 
 st.set_page_config(layout="wide")
 st.title("Use Case Radar")
 
-df_usecase = pd.read_excel('2024-01-02_UseCase_maturity_map_for_FSI.xlsx', sheet_name='use_case_master_radar')
+df_raw = pd.read_excel('2024-01-28_UseCase_maturity_map_for_FSI.xlsx', sheet_name='use_case_master_radar')
 
 # context selection
-unit = df_usecase['unit'].unique()
+unit = df_raw['unit'].unique()
 unit_choice = st.sidebar.selectbox('Select your Business Unit:', unit)
 
-sub_unit = df_usecase['sub_unit'].loc[df_usecase['unit'] == unit_choice].unique()
+sub_unit = df_raw['sub_unit'].loc[df_raw['unit'] == unit_choice].unique()
 sub_unit_choice = st.sidebar.multiselect('Select your Use Case Category:', sub_unit, default=sub_unit[0])
 
 maturity_stages = st.sidebar.select_slider(
@@ -30,12 +30,11 @@ elif maturity_stages == 'complex':
 else:
     print("unexpected")
 
-df_filtered = df_usecase.loc[(df_usecase['unit'] == unit_choice) &
-                             (df_usecase['sub_unit'].isin(sub_unit_choice)) &
-                             (df_usecase['maturity_stages'].isin(maturity_stages_choice))]
+df_filtered = df_raw.loc[(df_raw['unit'] == unit_choice) &
+                         (df_raw['sub_unit'].isin(sub_unit_choice)) &
+                         (df_raw['maturity_stages'].isin(maturity_stages_choice))]
 
-# st.dataframe(df_filtered)
-
+# print(df_filtered)
 fig = px.scatter(df_filtered,
                  labels={
                      'x_innovation': 'Maturity Stage:',
@@ -71,6 +70,7 @@ fig.update_yaxes(ticktext=["Foundation", "Optimization", "Transformation"],
                  tickangle=270,
                  showgrid=True,
                  zeroline=False)
+
 
 fig_2 = px.scatter(df_filtered,
                    labels={
@@ -111,6 +111,6 @@ fig_2.update_yaxes(ticktext=["Low", "Medium", "High"],
 
 tab1, tab2 = st.tabs(["Maturity Radar", "Long Hanging Fruit Radar"])
 with tab1:
-    st.plotly_chart(fig, theme="streamlit")
+    st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 with tab2:
-    st.plotly_chart(fig_2, theme="streamlit")
+    st.plotly_chart(fig_2, theme="streamlit", use_container_width=True)
